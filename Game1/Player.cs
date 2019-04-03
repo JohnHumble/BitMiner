@@ -160,7 +160,8 @@ namespace BitMiner
                 CellType type = button.TypeSelector;
                 if (button.Activated(mouse))
                 {
-                    credits += ship.removeItemByType(type);
+                    ship.removeItemByType(type);
+                    credits += button.Value;
                     button.Value = 0;
                 }
             }
