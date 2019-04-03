@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitMiner", "Game1\BitMiner.csproj", "{1B300504-4ED4-4B1E-BF7D-3C9A4025D554}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B300504-4ED4-4B1E-BF7D-3C9A4025D554}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B300504-4ED4-4B1E-BF7D-3C9A4025D554}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B300504-4ED4-4B1E-BF7D-3C9A4025D554}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B300504-4ED4-4B1E-BF7D-3C9A4025D554}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5E8C30A-D033-4ACF-BFE6-6D7F3A042871}
+	EndGlobalSection
+EndGlobal
