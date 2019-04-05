@@ -69,5 +69,17 @@ namespace BitMiner
             return (float)Math.Sqrt(vec.X * vec.X + vec.Y * vec.Y);
         }
 
+        public static int getValue(CellType selected, Planet planet)
+        {
+            foreach (var item in planet.ValuesList)
+            {
+                if (item.Type == selected)
+                {
+                    return item.Value;
+                }
+            }
+
+            return 0;
+        }
     }
 }

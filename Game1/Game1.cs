@@ -54,11 +54,12 @@ namespace BitMiner
             graphics.PreferredBackBufferWidth = screenWidth;
             graphics.ApplyChanges();
             this.IsMouseVisible = true;
-            player = new Player(0,0,screenWidth,screenHeight);
-            player.startBuild(screenWidth * .5f, screenHeight * .5f);
 
             station = new Station(new Vector2(0, 0));
             planets = new PlanetColecction();
+
+            player = new Player(planets.Planets[0],screenWidth,screenHeight, 200);
+            player.startBuild(screenWidth * .5f, screenHeight * .5f);
 
             pickups = new PickupManager();
             camera = new Camera(screenWidth * 0.5f, screenHeight * .5f, 0.75f,screenWidth,screenHeight);

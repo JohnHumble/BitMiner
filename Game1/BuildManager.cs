@@ -11,7 +11,6 @@ namespace BitMiner
     {
         Unit player;
         public CellType Selected { get; set; }
-
         bool rightClick;
         bool leftClick;
         Vector2 mouseVec;
@@ -32,24 +31,28 @@ namespace BitMiner
             this.rightClick = rightClick;
         }
 
-        public void building()
+        public int building(int credits, Planet planet)
         {
             player.cellSet(2, 0);
             Cell over = player.CellIntercect(mouseVec, 2);
 
             if (over != null)
             {
-                if (leftClick)
+                int cost = Tool.getValue(Selected, planet);
+                if (leftClick && !over.Live && credits >= cost)
                 {
                     over.Type = Selected;
                     over.reset();
                     over.Live = true;
+                    return cost;
                 }
-                if (rightClick)
+                if (rightClick && over.Live)
                 {
                     over.Live = false;
+                    return -cost;
                 }
             }
+            return 0;
         }
     }
 }

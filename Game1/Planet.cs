@@ -23,17 +23,7 @@ namespace BitMiner
             Gravity = gravity;
             Dockable = dockable;
 
-            ValuesList = new List<Cell>();
-
-            Cell goldVal = new Cell(CellType.Gold);
-            goldVal.Value = 50;
-            Cell ironVal = new Cell(CellType.Iorn);
-            ironVal.Value = 15;
-            Cell uraniumVal = new Cell(CellType.Uranium);
-            uraniumVal.Value = 20;
-            ValuesList.Add(goldVal);
-            ValuesList.Add(ironVal);
-            ValuesList.Add(uraniumVal);
+            setValues();
         }
 
         public Planet(int x, int y, int size, float gravity)
@@ -44,16 +34,38 @@ namespace BitMiner
             Dockable = true;
 
             ValuesList = new List<Cell>();
-            
+
+            setValues();
+        }
+
+        private void setValues()
+        {
+            ValuesList = new List<Cell>();
+            //TODO add some things to buy here.
             Cell goldVal = new Cell(CellType.Gold);
             goldVal.Value = 50;
+            ValuesList.Add(goldVal);
             Cell ironVal = new Cell(CellType.Iorn);
             ironVal.Value = 15;
+            ValuesList.Add(ironVal);
             Cell uraniumVal = new Cell(CellType.Uranium);
             uraniumVal.Value = 20;
-            ValuesList.Add(goldVal);
-            ValuesList.Add(ironVal);
             ValuesList.Add(uraniumVal);
+            Cell cabVal = new Cell(CellType.Cab);
+            cabVal.Value = 40;
+            ValuesList.Add(cabVal);
+            Cell hullVal = new Cell(CellType.Hull);
+            hullVal.Value = 10;
+            ValuesList.Add(hullVal);
+            Cell thrustVal = new Cell(CellType.Thruster);
+            thrustVal.Value = 20;
+            ValuesList.Add(thrustVal);
+            Cell blasterVal = new Cell(CellType.Blaster);
+            blasterVal.Value = 20;
+            ValuesList.Add(blasterVal);
+            Cell cargoVal = new Cell(CellType.Cargo);
+            cargoVal.Value = 20;
+            ValuesList.Add(cargoVal);
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D sphere)

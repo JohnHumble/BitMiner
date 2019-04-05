@@ -23,13 +23,16 @@ namespace BitMiner
 
         int credits;
 
-        public Player(float startX, float startY, int screenWidth, int screenHeight)
+        public Player(Planet startP, int screenWidth, int screenHeight, int startCredits)
         {
+            float startX = startP.Position.X;
+            float startY = startP.Position.Y;
+            pDock = startP;
+
             ship = new Ship(0, new Vector2(startX, startY), 0);
             holdLoc = new Vector2(startX, startY);
             buildManager = new BuildManager(ship);
-            pDock = null;
-            credits = 0;
+            credits = startCredits;
 
             const int SIDE_BUFFER = 10;
             const int TOP_BUFFER = 50;
@@ -85,6 +88,7 @@ namespace BitMiner
             if (bSel != CellType.Fill)
             {
                 buildManager.Selected = bSel;
+
             }
 
             sellButtonPress(Mouse.GetState());
@@ -94,7 +98,7 @@ namespace BitMiner
             bool rightMouse = Mouse.GetState().RightButton == ButtonState.Pressed;
 
             buildManager.GetMouse(mouseVec, leftMouse, rightMouse);
-            buildManager.building();
+            credits -= buildManager.building(credits,pDock);
 
             launch.Update(Mouse.GetState());
             if (Keyboard.GetState().IsKeyDown(Keys.Enter) || launch.Activated(Mouse.GetState()))
@@ -105,7 +109,7 @@ namespace BitMiner
 
             return Screen.build;
         }
-
+        
         public Screen inputControlPlay(float buildX, float buildY)
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Up) || Keyboard.GetState().IsKeyDown(Keys.W))
@@ -188,8 +192,7 @@ namespace BitMiner
             pDock = null;
             foreach (var planet in planets.Planets)
             {
-                
-
+               
                 if (Tool.distance2(ship.Locaion, planet.Position) < planet.Size)
                 {
                     pDock = planet;
@@ -233,8 +236,10 @@ namespace BitMiner
             {
                 sell.Draw(spriteBatch, fill, font, true);
             }
-
+                
             launch.Draw(spriteBatch, fill, font);
+
+            spriteBatch.DrawString(font, "Credits: " + credits, new Vector2(20, 20), Color.Green);
         }
         
         public void DrawHud(int x, int y, SpriteBatch spriteBatch, Texture2D fill, Texture2D sphere,SpriteFont font,AstroroidManager astroroids, PlanetColecction planets)

@@ -162,7 +162,7 @@ namespace BitMiner
             velocity += acc;
         }
 
-        const float TURN_REDUCE = 0.31415f; 
+        const float TURN_REDUCE = 0.157075f; 
 
         public void turnLeft()
         {
