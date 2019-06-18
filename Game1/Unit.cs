@@ -243,5 +243,10 @@ namespace BitMiner
             }
             return null;
         }
+
+        public List<Cell> GetCellList()
+        {
+            return cells;
+        }
     }
 }
