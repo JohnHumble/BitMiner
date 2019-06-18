@@ -14,7 +14,6 @@ namespace BitMiner
 {
     class Unit
     {
-        public int Size { get; protected set; } 
         public int CellSize { get; protected set; }
 
         protected List<Cell> cells;
@@ -27,22 +26,20 @@ namespace BitMiner
 
         public Unit()
         {
-            Size = 0;
             CellSize = 0;
             velocity = new Vector2(0, 0);
             Acceleration = new Vector2(0, 0);
             CellSize = 8;
-            center = new Vector2(Size * .5f - .5f, Size * .5f - .5f);
+            center = new Vector2(-.5f, -.5f);
         }
         
         public Unit(int size, int cellSize)
         {
-            this.Size = size;
             this.CellSize = cellSize;
             velocity = new Vector2(0, 0);
             Acceleration = new Vector2(0, 0);
             center = new Vector2(size * .5f - .5f, size * .5f - .5f);
-            initializeCells(false);
+            initializeCells(size, false);
         }
 
         public Unit(string filePath)
@@ -65,7 +62,6 @@ namespace BitMiner
         public void SetValuesFromUnitData(UnitData data)
         {
             CellSize = data.CellSize;
-            Size = data.Size;
 
             cells = new List<Cell>();
 
@@ -73,7 +69,6 @@ namespace BitMiner
             {
                 cells.Add(new Cell(cell));
             }
-            cellSet();
         }
 
         public void SaveUnit(string fileName)
@@ -107,12 +102,12 @@ namespace BitMiner
             return null;
         }
 
-        protected void initializeCells(bool live)
+        protected void initializeCells(int size, bool live)
         {
             cells = new List<Cell>();
-            for (int i = 0; i < Size; i++)
+            for (int i = 0; i < size; i++)
             {
-                for (int j = 0; j < Size; j++)
+                for (int j = 0; j < size; j++)
                 {
                     Cell tmp = new Cell(i - center.X, j - center.Y, (i * CellSize) - CellSize / 2 + location.X, (j * CellSize) + location.Y);
                     tmp.Live = live;
@@ -261,7 +256,7 @@ namespace BitMiner
                 cell.Y -= avgY;
             }
 
-            Size = (int)Math.Max(avgX, avgY) * 2;
+           // Size = (int)Math.Max(avgX, avgY) * 2;
         }
 
         private bool empty(Vector2 test)

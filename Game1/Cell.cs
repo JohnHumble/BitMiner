@@ -39,19 +39,7 @@ namespace BitMiner
             setValuesByType();
         }
 
-        public Cell(float x, float y, float locX, float locY)
-        {
-            X = x;
-            Y = y;
-            LocX = locX;
-            LocY = locY;
-
-            Live = false;
-            Type = CellType.Fill;
-            setValuesByType();
-        }
-
-        public Cell(float x, float y, float locX, float locY, CellType type, bool live)
+        public Cell(float x, float y, float locX, float locY, CellType type = CellType.Fill, bool live = false)
         {
             X = x;
             Y = y;
@@ -60,6 +48,18 @@ namespace BitMiner
 
             Live = live;
             Type = type;
+            setValuesByType();
+        }
+        public Cell(CellData data)
+        {
+            X = data.X;
+            Y = data.Y;
+            LocX = data.LocX;
+            LocY = data.LocY;
+
+            Live = data.Live;
+            Type = data.Type;
+
             setValuesByType();
         }
 
@@ -74,16 +74,6 @@ namespace BitMiner
             setValuesByType();
         }
 
-        public Cell(CellData data)
-        {
-            Live = data.Live;
-            X = data.X;
-            Y = data.Y;
-            LocX = 0;
-            LocY = 0;
-            Type = data.Type;
-            setValuesByType();
-        }
 
         private void setValuesByType()
         {

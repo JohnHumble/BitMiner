@@ -12,7 +12,6 @@ namespace BitMiner
     {
         public int Count { get; set; }
         public int CellSize { get; set; }
-        public int Size { get; set; }
 
         public CellData[] cells;
 
@@ -27,11 +26,10 @@ namespace BitMiner
             Count = unitCells.Count;
             CellSize = unit.CellSize;
             cells = new CellData[Count];
-            Size = unit.Size;
             
             for (int i= 0; i < Count; i++)
             {
-                CellData next = new CellData(unitCells[i].X, unitCells[i].Y, unitCells[i].Type, unitCells[i].Live);
+                CellData next = new CellData(unitCells[i]);
                 cells[i] = next;
             }
         }

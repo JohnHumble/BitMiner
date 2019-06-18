@@ -19,12 +19,11 @@ namespace BitMiner
             Acceleration = new Vector2(0, 0);
 
             CellSize = 32;
-            Size = 16;
             this.location = location;
             rotation = 0f;
 
-            center = new Vector2(Size * .5f - .5f, Size * .5f - .5f);
-            initializeCells(false);
+            center = new Vector2( - .5f,  - .5f);
+            initializeCells(16,false);
             buildStation();
             cellSet();
         }

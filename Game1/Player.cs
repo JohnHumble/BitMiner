@@ -85,7 +85,8 @@ namespace BitMiner
                 buildManager.Selected = CellType.Cargo;
 
             if (Keyboard.GetState().IsKeyDown(Keys.O))
-                ship = new Ship(ship.Locaion, 0, "lastShip");
+                ship.loadSaved("lastShip");
+                // ship = new Ship(ship.Locaion, 0, "lastShip");
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
                 ship.SaveUnit("lastShip");
@@ -94,7 +95,6 @@ namespace BitMiner
             if (bSel != CellType.Fill)
             {
                 buildManager.Selected = bSel;
-
             }
 
             sellButtonPress(Mouse.GetState());
@@ -209,9 +209,10 @@ namespace BitMiner
         public void startBuild(float x, float y)
         {
             holdLoc = ship.Locaion;
-            ship.clearDead();
+           // ship.clearDead();
             ship.expand(64);
             ship.Locaion = new Vector2(x,y);
+
             setButtonValues();
             //ship.cellSet();
         }

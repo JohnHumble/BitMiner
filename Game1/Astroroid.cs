@@ -13,6 +13,7 @@ namespace BitMiner
         Random rand;
 
         public float Mass { get; protected set; }
+        public int Size { get; protected set; }
 
         public Astroroid(int size, int cellSize, Random rand)
         {

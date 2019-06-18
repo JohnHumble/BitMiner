@@ -38,9 +38,8 @@ namespace BitMiner
             CellSize = 8;
             this.location = location;
             this.rotation = rotation;
-            Size = size;
             center = new Vector2(size * .5f - .5f, size * .5f - .5f);
-            initializeCells(false);
+            initializeCells(size, false);
             calculateValues();
         }
         public Ship(Vector2 location, float rotation, string saveFile)
@@ -62,6 +61,14 @@ namespace BitMiner
             this.location = location;
             this.rotation = rotation;
 
+            UnitData data = LoadUnitData(saveFile);
+            SetValuesFromUnitData(data);
+
+            calculateValues();
+        }
+
+        public void loadSaved(string saveFile)
+        {
             UnitData data = LoadUnitData(saveFile);
             SetValuesFromUnitData(data);
 
@@ -238,6 +245,7 @@ namespace BitMiner
                         spriteBatch.Draw(fill, RenderRec, null, Color.OrangeRed, rotation, origin, SpriteEffects.None, 0f);
                     }
                 }
+                spriteBatch.Draw(fill, cell.Location(), Color.Yellow);
             }
             if (enginThrust)
                 enginThrust = false;
@@ -259,7 +267,7 @@ namespace BitMiner
                 }
                 else
                 {
-                    if (((int)(cell.X + Size) % 2 == 0 && (int)(cell.Y + Size) % 2 == 0) || ((int)(cell.X + Size) % 2 == 1 && (int)(cell.Y + Size) % 2 == 1))
+                    if (((int)(cell.X) % 2 == 0 && (int)(cell.Y) % 2 == 0) || ((int)(cell.X) % 2 == 1 && (int)(cell.Y) % 2 == 1))
                         col = new Color(0, 80, 0);
                     else
                         col = new Color(0, 0, 80);
