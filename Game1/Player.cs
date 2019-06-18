@@ -84,6 +84,12 @@ namespace BitMiner
             if (Keyboard.GetState().IsKeyDown(Keys.G))
                 buildManager.Selected = CellType.Cargo;
 
+            if (Keyboard.GetState().IsKeyDown(Keys.O))
+                ship = new Ship(ship.Locaion, 0, "lastShip");
+
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+                ship.SaveUnit("lastShip");
+
             CellType bSel = buttonSelect(Mouse.GetState());
             if (bSel != CellType.Fill)
             {

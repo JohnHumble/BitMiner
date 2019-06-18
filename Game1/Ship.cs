@@ -43,6 +43,30 @@ namespace BitMiner
             initializeCells(false);
             calculateValues();
         }
+        public Ship(Vector2 location, float rotation, string saveFile)
+        {
+            enginThrust = false;
+            Shot = new List<PlasmaShot>();
+            blasters = new List<Cell>();
+            items = new List<Item>();
+            shotCooldown = 0;
+            mass = 0;
+            thrustSpeed = 0;
+            power = 0;
+            cargo = 0;
+            usedCargo = 0;
+
+            velocity = new Vector2(0, 0);
+            Acceleration = new Vector2(0, 0);
+            CellSize = 8;
+            this.location = location;
+            this.rotation = rotation;
+
+            UnitData data = LoadUnitData(saveFile);
+            SetValuesFromUnitData(data);
+
+            calculateValues();
+        }
 
         public void calculateValues()
         {

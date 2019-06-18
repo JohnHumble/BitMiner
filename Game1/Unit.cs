@@ -3,6 +3,10 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,6 +43,68 @@ namespace BitMiner
             Acceleration = new Vector2(0, 0);
             center = new Vector2(size * .5f - .5f, size * .5f - .5f);
             initializeCells(false);
+        }
+
+        public Unit(string filePath)
+        {
+            velocity = new Vector2(0, 0);
+            Acceleration = new Vector2(0, 0);
+
+            UnitData saveData = LoadUnitData(filePath);
+            SetValuesFromUnitData(saveData);
+        }
+
+        public Unit(UnitData data)
+        {
+            velocity = new Vector2(0,0);
+            Acceleration = new Vector2(0, 0);
+
+            SetValuesFromUnitData(data);
+        }
+
+        public void SetValuesFromUnitData(UnitData data)
+        {
+            CellSize = data.CellSize;
+            Size = data.Size;
+
+            cells = new List<Cell>();
+
+            foreach (var cell in data.cells)
+            {
+                cells.Add(new Cell(cell));
+            }
+            cellSet();
+        }
+
+        public void SaveUnit(string fileName)
+        {
+            UnitData data = new UnitData(this);
+            string savePath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            savePath += "\\" + fileName;
+
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(savePath, FileMode.Create, FileAccess.Write);
+
+            formatter.Serialize(stream, data);
+            stream.Close();
+        }
+
+        public UnitData LoadUnitData(string fileName)
+        {
+            IFormatter formatter = new BinaryFormatter();
+
+            string loadPath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            loadPath += "\\" + fileName;
+
+            if (File.Exists(loadPath))
+            {
+                Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                UnitData load = (UnitData)formatter.Deserialize(stream);
+
+                stream.Close();
+                return load;
+            }
+            return null;
         }
 
         protected void initializeCells(bool live)
@@ -102,8 +168,7 @@ namespace BitMiner
             
             Live = cells.Count > 0;
         }
-
-
+        
         public void restGrid(int size)
         {
             if (cells.Count == 0)

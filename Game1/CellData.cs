@@ -19,11 +19,12 @@ namespace BitMiner
         public CellType Type { get; set; }
         public bool Live { get; set; }
 
-        public CellData(float x, float y, CellType type)
+        public CellData(float x, float y, CellType type, bool live)
         {
             X = x;
             Y = y;
             Type = type;
+            Live = live;
         }
     }
 }

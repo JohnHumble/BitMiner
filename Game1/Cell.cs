@@ -7,8 +7,6 @@ using Microsoft.Xna.Framework;
 
 namespace BitMiner
 {
-    enum CellType { Hull, Cab, Thruster, Blaster, Cargo, Fill, Iorn, Gold, Uranium }
-
     class Cell
     {
         public float X { get; set; }
@@ -73,6 +71,17 @@ namespace BitMiner
             LocX = old.LocX;
             LocY = old.LocY;
             Type = type;
+            setValuesByType();
+        }
+
+        public Cell(CellData data)
+        {
+            Live = data.Live;
+            X = data.X;
+            Y = data.Y;
+            LocX = 0;
+            LocY = 0;
+            Type = data.Type;
             setValuesByType();
         }
 
